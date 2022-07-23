@@ -1,0 +1,23 @@
+@page "/temperature"
+
+<h3 id="center">Conversor de temperatura
+	de grados Celsius a Kelvin y Fahrenheit</h3>
+
+<div class="mt-4" id="center">
+	<input type="text" @bind="celsius" placeholder="Temperatura en celsius">
+	<button @onclick="Convertir" class="btn btn-outline-warning">Convertir</button>
+	<br> <br> Temperatura en Grado <span>kelvin</span>: @kelvin <br><br>
+	Temperatura en Grado <span>fahrenheit</span>: @fahrenheit
+</div>
+
+@code {
+
+	double celsius;
+	double kelvin;
+	double fahrenheit;
+	void Convertir()
+	{
+		kelvin = celsius + 273.15;
+		fahrenheit = celsius * 1.8 + 32;
+	}
+}

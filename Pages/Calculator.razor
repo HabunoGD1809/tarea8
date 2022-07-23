@@ -1,0 +1,41 @@
+@page "/calculator"
+
+<div id="center">
+    <h3><span class="oi oi-calculator" aria-hidden="true"></span>Calculadora</h3>
+
+    <div class="mt-4">
+        <label>Numero 1</label>
+        <input type="number" @bind="num1">
+    </div>
+    <div class="mt-4">
+        <label>Numero 2</label>
+        <input type="number" @bind="num2">
+    </div>
+    <div class="mt-4">
+        <button @onclick="suma" class="btn btn-outline-info">Suma</button>
+        <button @onclick="resta" class="btn btn-primary">Resta</button>
+        <button @onclick="multiplicacion" class="btn btn-warning">Multiplicacion</button>
+        <button @onclick="division" class="btn btn-outline-danger">Division</button>
+    </div>
+    <div class="mt-4">
+        <p>Resultado: @resultado</p>
+    </div>
+</div>
+
+@code {
+    float num1;
+    float num2; 
+    float resultado;
+    void suma(){
+    resultado = num1 + num2;
+    }
+    void resta(){
+        resultado = num1 - num2;
+    }
+    void multiplicacion(){
+        resultado = num1 * num2;
+    }
+    void division(){
+        resultado = num1 / num2;
+    }
+}

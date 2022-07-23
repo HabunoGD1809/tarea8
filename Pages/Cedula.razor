@@ -1,0 +1,47 @@
+@page "/cedula"
+
+<h3 id="center">Verifique su Cédula</h3>
+
+<div class="mt-4" id="center">
+	<input type="text" @bind="cedula" placeholder="Ingresa tu Cédula">
+	<button @onclick="Consultar" class="btn btn-success">Consultar</button>
+</div>
+
+@if (persona.ok)
+{
+	<div class="container">
+		<div>
+			<img src="@persona.foto" alt="">
+		</div>
+		<div>
+			<span>Nombres: </span>@persona.Nombres
+		</div>
+		<div>
+			<span>Apellidos: </span>@persona.Apellido1 @persona.Apellido2
+		</div>
+		<div>
+			<span>Fecha de nacimiento: </span>@persona.fecha();
+		</div>
+		<div>
+			<span>Edad: </span>@persona.edad();
+		</div>
+		<div>
+			<span>Signo: </span>@persona.SignoZodiacal();
+		</div>
+	</div>
+}
+
+@code {
+	string cedula = "";
+	Persona persona = new Persona();
+	void Consultar()
+	{
+		Uri url = new Uri($"https://api.adamix.net/apec/cedula/{cedula}");
+		using (var client = new HttpClient())
+		{
+			var request = client.GetAsync(url).GetAwaiter().GetResult();
+			string responString = request.Content.ReadAsStringAsync().Result;
+			persona = Newtonsoft.Json.JsonConvert.DeserializeObject<Persona>(responString) ?? new Persona();
+		}
+	}
+}
